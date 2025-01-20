@@ -3,6 +3,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Locale;
 
@@ -37,14 +38,27 @@ public class Main {
         System.out.println("Преобразование даты и времени: " + updateDateAndTime);
 
         LocalDateTime firstDateAndTime = LocalDateTime.now();
-        LocalDateTime secondDateAndTime = LocalDateTime.now().minusDays(2);
+        LocalDateTime secondDateAndTime = LocalDateTime.now().plusDays(2);
 
-        if (firstDateAndTime.isAfter(secondDateAndTime)) {
+//        if (firstDateAndTime.isAfter(secondDateAndTime)) {
+//            System.out.println("Первая дата позже второй!");
+//        } else if (firstDateAndTime.isEqual(secondDateAndTime)) {
+//            System.out.println("Даты равны!");
+//        } else if (firstDateAndTime.isBefore(secondDateAndTime)) {
+//            System.out.println("Первая дата раньше второй!");
+//        }
+
+        if (firstDateAndTime.compareTo(secondDateAndTime) > 0) {
             System.out.println("Первая дата позже второй!");
-        } else if (firstDateAndTime.isEqual(secondDateAndTime)) {
+        } else if (firstDateAndTime.compareTo(secondDateAndTime) == 0) {
             System.out.println("Даты равны!");
-        } else if (firstDateAndTime.isBefore(secondDateAndTime)) {
+        } else if (firstDateAndTime.compareTo(secondDateAndTime) < 0) {
             System.out.println("Первая дата раньше второй!");
         }
+
+        long difference = firstDateAndTime.until(secondDateAndTime, ChronoUnit.DAYS);
+        System.out.println(
+                "Разница между числами " + firstDateAndTime + ", " + secondDateAndTime +
+                        " равна " + difference + " дня");
     }
 }
