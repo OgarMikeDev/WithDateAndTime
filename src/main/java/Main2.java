@@ -9,5 +9,7 @@ public class Main2 {
 
         long end = System.currentTimeMillis() - start;
         System.out.println("За " + end + " миллисекунд[ы] выполнилось 1 миллиарда операций");
+
+
     }
 }
