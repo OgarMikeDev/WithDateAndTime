@@ -12,53 +12,57 @@ public class Main {
         Date date = new Date();
         System.out.println("Date: " + date);
 
-        LocalDate today = LocalDate.now();
-        System.out.println("Local date: " + today);
-
-        LocalDate birthDay = LocalDate.of(1999, 12, 6);
-        System.out.println("День моего рождения: " + birthDay.plusYears(1));
+        LocalDate localDate = LocalDate.now();
+        System.out.println("LocalDate: " + localDate);
 
         LocalDateTime localDateTime = LocalDateTime.now();
         System.out.println("LocalDateTime: " + localDateTime);
 
-        LocalDateTime nowNY = LocalDateTime.now(ZoneId.of("America/New_York"));
-        System.out.println("Date and time in New York: " + nowNY);
+        LocalDate birthday = LocalDate.of(2000, 12, 6);
+        System.out.println("Birthday LocalDate.of(): " + birthday);
 
-        String strDate = "20/01/2025";
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate localDate = LocalDate.parse(strDate, dateTimeFormatter);
-        System.out.println("Текущая дата, преобразованная из str: " + localDate);
+        LocalDate adulthood = birthday.plusYears(18);
+        System.out.println("18 лет мне исполнилось в " + adulthood + " году!");
 
-//        DateTimeFormatter actualDateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-//        DateTimeFormatter actualDateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
-        DateTimeFormatter actualDateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
+        LocalDateTime dateTimeNY = LocalDateTime.now(ZoneId.of("America/New_York"));
+        System.out.println("Дата и время в Нью-Йорке сейчас: " + dateTimeNY);
+
+        String strDate = "21?01?2025";
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd?MM?yyyy");
+        LocalDate localDateFromStrDate = LocalDate.parse(strDate, dateTimeFormatter);
+        System.out.println("Преобразованная дата из строкового значения: " + localDateFromStrDate);
+
+        LocalDateTime localDateTimeForParsing = LocalDateTime.now();
+//        DateTimeFormatter dateTimeFormatterForParsing =  DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+//        DateTimeFormatter dateTimeFormatterForParsing =  DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
+        DateTimeFormatter dateTimeFormatterForParsing =  DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
                 .localizedBy(new Locale("us"));
-        LocalDateTime actualLocalDateTime = LocalDateTime.now();
-        String updateDateAndTime = actualDateTimeFormatter.format(actualLocalDateTime);
-        System.out.println("Преобразование даты и времени: " + updateDateAndTime);
+        String strDateTimeFromLDT = dateTimeFormatterForParsing.format(localDateTimeForParsing);
+        System.out.println("Преобразованная дата из LocalDateTime: " + strDateTimeFromLDT);
 
-        LocalDateTime firstDateAndTime = LocalDateTime.now();
-        LocalDateTime secondDateAndTime = LocalDateTime.now().plusDays(2);
+        LocalDateTime firstDateTime = LocalDateTime.now();
+        LocalDateTime secondDateTime = LocalDateTime.now().plusDays(2);
 
-//        if (firstDateAndTime.isAfter(secondDateAndTime)) {
-//            System.out.println("Первая дата позже второй!");
-//        } else if (firstDateAndTime.isEqual(secondDateAndTime)) {
-//            System.out.println("Даты равны!");
-//        } else if (firstDateAndTime.isBefore(secondDateAndTime)) {
+//        if (firstDateTime.isBefore(secondDateTime)) {
 //            System.out.println("Первая дата раньше второй!");
+//        } else if (firstDateTime.isEqual(secondDateTime)) {
+//            System.out.println("Даты равны!");
+//        } else if (firstDateTime.isAfter(secondDateTime)) {
+//            System.out.println("Первая дата позже второй!");
 //        }
 
-        if (firstDateAndTime.compareTo(secondDateAndTime) > 0) {
-            System.out.println("Первая дата позже второй!");
-        } else if (firstDateAndTime.compareTo(secondDateAndTime) == 0) {
-            System.out.println("Даты равны!");
-        } else if (firstDateAndTime.compareTo(secondDateAndTime) < 0) {
+        if (firstDateTime.compareTo(secondDateTime) < 0) {
             System.out.println("Первая дата раньше второй!");
+        } else if (firstDateTime.compareTo(secondDateTime) == 0) {
+            System.out.println("Даты равны!");
+        } else if (firstDateTime.compareTo(secondDateTime) > 0) {
+            System.out.println("Первая дата позже второй!");
         }
 
-        long difference = firstDateAndTime.until(secondDateAndTime, ChronoUnit.DAYS);
+        long difference = firstDateTime.until(secondDateTime, ChronoUnit.HOURS);
         System.out.println(
-                "Разница между числами " + firstDateAndTime + ", " + secondDateAndTime +
-                        " равна " + difference + " дня");
+                "Разница между датами \n" + firstDateTime +
+                        "\n" + secondDateTime +
+                        "\nравна " + difference + " часам!");
     }
 }
