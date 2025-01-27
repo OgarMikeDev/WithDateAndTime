@@ -22,17 +22,17 @@ public class Main4 {
         return String.valueOf(allBirthdays);
     }
 
-    public static String collectBirthdays2(int year, int month, int day){
+    public static String collectBirthdays2(int year, int month, int day) {
         LocalDate birthday = LocalDate.of(year, month, day);
 
         LocalDate today = LocalDate.now();
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
-        String strDate = birthday.format(dateTimeFormatter);
 
         String allDates = "";
-        for(int i = 0; birthday.isBefore(today); i++ ){
+        for (int i = 0; birthday.isBefore(today); i++) {
 
+            String strDate = birthday.format(dateTimeFormatter);
             allDates += i + " - " + strDate + " - " + birthday.getDayOfWeek() + "\n";
 
             birthday = birthday.plusYears(1);
