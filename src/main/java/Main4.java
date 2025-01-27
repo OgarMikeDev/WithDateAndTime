@@ -6,6 +6,7 @@ public class Main4 {
     public static void main(String[] args) {
         //System.out.println("All birthdays:\n" + collectBirthdays(2000, 12, 6));
         System.out.println("All birthdays:\n" + collectBirthdays2(2000, 12, 6));
+        System.out.println("Времени прошло с дата основания java:\n" + getPeriodFromBirthday(LocalDate.now(), LocalDate.of(1995, 5, 23)));
     }
 
     public static String collectBirthdays(int year, int month, int day) {
@@ -38,5 +39,13 @@ public class Main4 {
             birthday = birthday.plusYears(1);
         }
         return allDates;
+    }
+
+    public static String getPeriodFromBirthday(LocalDate firstDate, LocalDate secondDate) {
+        int differenceYears = firstDate.getYear() - secondDate.getYear();
+        int differenceMonths = Math.abs(firstDate.getMonthValue() - secondDate.getMonthValue());
+        int differenceDays = Math.abs(firstDate.getDayOfMonth() - secondDate.getDayOfMonth());
+        String fullDifference = "years: " + differenceYears + ", months: " + differenceMonths + ", days: " + differenceDays;
+        return fullDifference;
     }
 }
