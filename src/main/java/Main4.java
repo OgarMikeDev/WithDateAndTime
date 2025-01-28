@@ -23,6 +23,20 @@ public class Main4 {
         return String.valueOf(allBirthdays);
     }
 
+        public static String collectBirthdays3(int year, int month, int day) {
+        LocalDate birthday = LocalDate.of(year, month, day);
+        LocalDate today = LocalDate.now();
+        String allBirthdays = "";
+        for (int index = 0; birthday.isBefore(today); index++) {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+            String strDate = birthday.format(dateTimeFormatter);
+            allBirthdays += index + " - " + strDate + " - " + birthday.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + "\n";
+            birthday = birthday.plusYears(1);
+        }
+
+        return allBirthdays;
+    }
+
     public static String collectBirthdays2(int year, int month, int day) {
         LocalDate birthday = LocalDate.of(year, month, day);
 
